@@ -1,0 +1,22 @@
+Files with names that matches 1.*nia$
+**************************************************
+Files with the content that matches 1.*nia$
+./p1/dir1/a.rb
+  1:      line 1 of a.arb  chico california
+-------------------------------------------------
+./p1/dir1/b.erb
+  1:      line 1 of b.erb  chico california
+  1003:      line 1003 of b.erb  chico california
+-------------------------------------------------
+./p1/dir1/c.js
+  1:      line 1 of c.js chico california
+-------------------------------------------------
+./p1/dir1/f.yml
+  1:      line 1 of f.yml chico california
+-------------------------------------------------
+./p1/dir1/g.txt
+  1:      line 1 of g.txt chico california
+-------------------------------------------------
+./p1/dir2/chico.rb
+  1:      line 1 of chico.rb chico california
+-------------------------------------------------
