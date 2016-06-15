@@ -1,0 +1,38 @@
+<% load "#{Rails.root}/lib/testwords.rb"%>
+<h1>Brennan's Word Ladder</h1>
+<hr>
+<div> <p> Fill in each step with a word that differs from the word in the previous step by no more than one character. Once you reach a word that differs from the goal by only one letter, you can stop and leave the remainder of the steps empty. </p> <div>
+<br>
+
+<% wordsarray = Array.new %>
+<% wordsarray = dictionary %>
+<% index = rand(wordsarray.size-1) %>
+<% start = wordsarray[index]; wordsarray[index] = nil; wordsarray.compact! %>
+<% index = rand(wordsarray.size-1) %>
+<% goal = wordsarray[index]; wordsarray[index] = nil; wordsarray.compact! %>
+
+<%= form_tag(query_path, method: "get") do  %>
+    <%= hidden_field_tag 'start', start %>
+    <%= hidden_field_tag 'goal', goal %>
+    <%= label_tag(:start, "Step0: #{start}") %>
+    <br>
+    <%= label_tag(:query1, "Step1:") %>
+    <%= text_field_tag(:step1) %>
+    <br>
+    <%= label_tag(:query2, "Step2:") %>
+    <%= text_field_tag(:step2) %>
+    <br>
+    <%= label_tag(:query3, "Step3:") %>
+    <%= text_field_tag(:step3) %>
+    <br>
+    <%= label_tag(:query4, "Step4:") %>
+    <%= text_field_tag(:step4) %>
+    <br>
+    <%= label_tag(:query5, "Step5:") %>
+    <%= text_field_tag(:step5) %>
+    <%= submit_tag("Check Answer") %>
+    <br>
+    <%= label_tag(:goal, "Goal: #{goal}") %>
+<% end %>
+
+

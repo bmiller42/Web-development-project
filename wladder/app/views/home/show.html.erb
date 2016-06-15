@@ -1,0 +1,47 @@
+<%= link_to "Play Again", root_path %>
+
+<h1> Your Guesses </h1>
+<br>
+<table>
+    <tr>
+        <td> <%= "Start:" %> </td>
+        <td> <%= params[:start] %> </td>
+    </tr>
+    <tr>
+        <% if params[:step1] != "" %>
+        <td> <%= "Step1:" %> </td>
+        <td> <%= params[:step1] %> </td>
+        <%end%>
+    </tr>
+    <tr>
+        <% if params[:step2] != "" %>
+        <td> <%= "Step2:" %> </td>
+        <td> <%= params[:step2] %> </td>
+        <%end%>
+    </tr>
+    <tr>
+        <% if params[:step3] != "" %>
+        <td> <%= "Step3:" %> </td>
+        <td> <%= params[:step3] %> </td>
+        <%end%>
+    </tr>
+    <tr>
+        <% if params[:step4] != "" %>
+        <td> <%= "Step4:" %> </td>
+        <td> <%= params[:step4] %> </td>
+        <%end%>
+    </tr>
+    <tr>
+        <% if params[:step5] != "" %>
+        <td> <%= "Step5:" %> </td>
+        <td> <%= params[:step5] %> </td>
+        <%end%>
+    </tr>
+    <tr>
+        <td> <%= "End:" %> </td>
+        <td> <%= params[:goal] %> </td>
+    </tr>
+</table>
+<h2> <%= @result %> </h2>
+
+
