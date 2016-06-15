@@ -1,5 +1,17 @@
+<!DOCTYPE html>
 <%= link_to "Play Again", root_path %>
+<html>
 
+<head>
+    <link rel="stylesheet" href="/home/ubuntu/465/wladder/app/views/home/style.css">
+<style>
+h1 {color:blue;}
+table, th, td {border: 1px solid red; border-collapse: collapse;}
+th, td {padding: 5px;}
+</style>
+</head>
+
+<body>
 <h1> Your Guesses </h1>
 <br>
 <table>
@@ -43,5 +55,5 @@
     </tr>
 </table>
 <h2> <%= @result %> </h2>
-
-
+</body>
+</html>
