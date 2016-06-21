@@ -14,10 +14,12 @@
 ActiveRecord::Schema.define(version: 20160620130442) do
 
   create_table "references", force: :cascade do |t|
-    t.string "URL"
-    t.string "topic"
-    t.string "annotation"
-    t.string "datetime"
+    t.text     "URL"
+    t.string   "topic"
+    t.string   "annotation"
+    t.datetime "datetime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
