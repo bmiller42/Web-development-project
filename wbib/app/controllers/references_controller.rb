@@ -34,4 +34,11 @@ class ReferencesController < ApplicationController
             render :edit
         end
     end
+
+    def destroy
+        @reference = Reference.find(params[:id])
+        @reference.destroy
+        redirect_to references_url, notice: 'Reference was successfully destroyed.'
+    end
+
 end

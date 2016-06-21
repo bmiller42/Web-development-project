@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'references', to: 'references#index', as: 'references'
     post 'references', to: 'references#create'
     patch 'references/:id', to: 'references#update'
+    delete 'references/:id', to: 'references#destroy'
     root 'references#index'
 
 end
