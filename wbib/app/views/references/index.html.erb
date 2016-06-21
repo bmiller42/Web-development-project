@@ -1,12 +1,11 @@
+<p id="notice"><%= notice %></p>
 <h1>Listing References</h1>
 
-<table>
+<table border="1" style="width:100%">
     <thead>
         <tr>
-            <th>URL</th>
-            <th>Topic</th>
-            <th>Annotdation</th>
-            <th>DateTime</th>
+            <th>Topics</th>
+            <th>Options</th>
             <th colspan="3"></th>
         </tr>
     </thead>
@@ -14,13 +13,10 @@
     <tbody>
         <% @references.each do |reference| %>
             <tr>
-                <td><%= reference.URL %></td>
                 <td><%= reference.topic %></td>
-                <td><%= reference.annotation %></td>
-                <td><%= reference.datetime %></td>
-                <td><%= link_to 'Show', reference %></td>
-                <td><%= link_to 'Edit', edit_reference_path(reference) %></td>
-                <td><%= link_to 'Destroy', reference, method: :delete, data: { confirm: "Are you sure you want to delete #{reference.topic} reference?" } %></td>
+                <td><%= link_to 'Show', reference %>
+                <%= link_to 'Edit', edit_reference_path(reference) %>
+                <%= link_to 'Destroy', reference, method: :delete, data: { confirm: "Are you sure you want to delete #{reference.topic} reference?" } %></td>
             </tr>
         <% end %>
     </tbody>

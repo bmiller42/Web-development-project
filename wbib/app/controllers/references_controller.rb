@@ -13,8 +13,9 @@ class ReferencesController < ApplicationController
     end
 
     def create 
-        
-        @reference = Reference.new(params.require(:reference).permit(:URL, :topic, :annotation, :datetime))
+                
+        @reference = Reference.new(params.require(:reference).permit(:URL, :topic, :annotation))
+        @reference.datetime = @reference.created_at
         if @reference.save
             redirect_to @reference, notice: 'Reference was successfully created.'
         else
