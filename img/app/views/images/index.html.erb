@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>My Images</th>
+      <th colspan="10"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @images.each do |image| %>
+        <% if !image.private %>  
+        <tr>
+            <td><%= image_tag root_url + "images/" + image.filename, size: "100x100"%></td>
+            <td><%= "public" %></td>
+            <td><%= image.user_id %></td>
+            <td><%= link_to 'Show', image %></td>
+            <td><%= link_to 'Edit', edit_image_path(image) %></td>
+            <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Image', new_image_path %>
