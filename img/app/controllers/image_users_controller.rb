@@ -23,17 +23,15 @@ class ImageUsersController < ApplicationController
 
   # POST /image_users
   # POST /image_users.json
+  # images/42/image_user/create
   def create
+    @image = Image.find params[:image_id]
     @image_user = ImageUser.new(image_user_params)
-
-    respond_to do |format|
-      if @image_user.save
-        format.html { redirect_to @image_user, notice: 'Image user was successfully created.' }
-        format.json { render :show, status: :created, location: @image_user }
-      else
-        format.html { render :new }
-        format.json { render json: @image_user.errors, status: :unprocessable_entity }
-      end
+    @image_user.image = @image
+    if @image_user.save
+      redirect_to @image, notice: 'User was granted access.'
+    else
+      redirect_to @image, notice: 'User was NOT granted access.'
     end
   end
 

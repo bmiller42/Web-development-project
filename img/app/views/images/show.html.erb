@@ -1,24 +1,38 @@
 <p id="notice"><%= notice %></p>
+<% if !@current_user_access %>
+    <h1>Permissions denied</h1>
+    <%= link_to 'Back', images_path %>
+<% end %>
+<%= link_to (image_tag root_url + "images/" + @image.filename, size: "300x300"), @image %>
+<p>Image Owner: <%= current_user.email %></p>
 
-<p>
-  <strong>Filename:</strong>
-  <%= @image.filename %>
-</p>
 
 <p>
   <strong>Private:</strong>
   <%= @image.private %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @image.user_id %>
-</p>
+<% if @owned_by_user %>
+    <p>
+    <strong>Tags: </strong>
+    <% @image.tags.each do |tag| %>
+        <p>
+            <%= tag.str %> 
+        </p>
+    <% end %>
+    </p>
+    <p>Create new Tag: 
+        <%= form_for([@image, @tag]) do |f| %>
+            <%= f.text_field :str %>
+            <%= f.submit "Add new Tag" %>
+        <% end %>
+    </p>
+    <%= render 'image_users/form' %>
+    <br>
+    <%= link_to 'Edit', edit_image_path(@image) %>
+    <%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' }%>
+<% end %>
+<br>
 
-<p>
-  <strong>Tag:</strong>
-  <%= @image.tag %>
-</p>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>

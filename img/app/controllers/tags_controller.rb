@@ -26,14 +26,10 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.new(tag_params)
 
-    respond_to do |format|
-      if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
-      else
-        format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
+    if @tag.save
+      redirect_to @image, notice: 'Tag was successfully created.'
+    else 
+      redirect_to @image, notice: 'Tag was NOT successfully created.'
     end
   end
 

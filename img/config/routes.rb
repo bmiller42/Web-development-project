@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   
     root "images#index"
-    resources :image_users
     devise_for :users
-    resources :images
-    resources :tags
+    resources :images do
+        resources :tags, :shallow=>true
+        resources :image_users, :shallow=>true
+    end
 
 end
