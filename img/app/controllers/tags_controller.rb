@@ -25,7 +25,7 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-
+    set_tag
     if @tag.save
       redirect_to @image, notice: 'Tag was successfully created.'
     else 
@@ -36,14 +36,10 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   # PATCH/PUT /tags/1.json
   def update
-    respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tag }
-      else
-        format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
-      end
+    if @tag.update(tag_params)
+      redirect_to @tag, notice: 'Tag was successfully updated.'
+    else
+      render :edit
     end
   end
 
