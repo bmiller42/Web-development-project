@@ -1,6 +1,13 @@
 <%= form_for([@image]) do |f| %>
     <br>
-    <p>Upload new image</p>
+    <%= f.label "private: " %>
+    <%= f.check_box :private %>
+    <%= f.submit "Change" %>
+    <br>
+    <br>
+    <strong>Upload new image</strong>
+    <br>
     <%= f.file_field :uploaded_file %>
     <%= f.submit "Upload this file" %>
 <% end %>
+<br>

@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Images</h1>
-
+<body>
 <% if @my_images %>
     <h2>My Images</h2>
     <% @my_images.each do |image| %>
@@ -19,10 +19,12 @@
 <% end %>
 <h4><strong>Public Images</strong></h4>
 <% @public.each do |image| %>
-    
-    <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>  
+    <div class="floated_img">
+        <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %> 
+        <p>Owners name </p>
+    </div> 
 
 <% end %>
 <br>
-
+</body>
 <%= link_to 'New Image', new_image_path %>
