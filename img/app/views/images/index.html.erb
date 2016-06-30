@@ -1,30 +1,60 @@
 <p id="notice"><%= notice %></p>
+<style>
+.floated_img
+{
+    border: 2px solid black;
+    padding: 10px;
+    margin: 15px;
+    display: inline-block; 
+}
+.page
+{
+    padding: 10px;
+    margin: 15px; 
+    display: inline-block;
+}
+h4 {
+    font-family: courier;
+    font-size: 160%;
+}
+body {background-color:lightgrey;}
+</style>
 
-<h1>Listing Images</h1>
+<h1>Listing Images </h1>
+<div class="page">
 <body>
 <% if @my_images %>
     <h2>My Images</h2>
     <% @my_images.each do |image| %>
-        
-        <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>
-        
+        <div class="floated_img">
+            <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>
+            <p><%= image.user.name %></p>
+        </div>
     <% end %>
 <% end %>
+</div>
+<div class="page">
+<hr>
 <% if @my_private_images %>
     <h3>Private Images that I can access</h3>
     <% @my_private_images.each do |image| %>
-    <% %>
-    <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>
+        <div class="floated_img">
+            <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>
+            <p><%= image.user.name %></p>
+        </div>
     <% end %>
 <% end %>
+</div>
+<div class="page">
+<hr>
 <h4><strong>Public Images</strong></h4>
 <% @public.each do |image| %>
     <div class="floated_img">
         <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %> 
-        <p>Owners name </p>
+        <p><%= image.user.name %></p>
     </div> 
-
 <% end %>
-<br>
+</div>
+<div><%= link_to 'New Image', new_image_path %><div>
 </body>
-<%= link_to 'New Image', new_image_path %>
+</div>
