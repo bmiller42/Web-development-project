@@ -3,6 +3,7 @@ class ImagesController < ApplicationController
 
   # GET /images
   def index
+    
     if current_user
         @my_images = current_user.images
         @my_private_images = current_user.image_user.map {|image_user| image_user.image}
@@ -26,6 +27,7 @@ class ImagesController < ApplicationController
       @image_user = @image.image_users.new
       @owned_by_user = (@image.user == current_user)
       @list_of_users = @image.already_added
+      @all_users = @image.all_users
   end
 
   # GET /images/new

@@ -39,9 +39,9 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1.json
   def update
     if @tag.update(tag_params)
-      redirect_to @tag, notice: 'Tag was successfully updated.'
+      redirect_to @tag.image, notice: 'Tag was successfully updated.'
     else
-      render :edit
+      redirect_to @tag.image, notice: 'Tag was NOT successfully updated.'
     end
   end
 

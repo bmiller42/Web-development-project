@@ -8,6 +8,9 @@ class Image < ActiveRecord::Base
         user_array = User.all - self.users - [self.user]
         user_array = user_array.map {|user| [user.name + "("+ user.email + ")", user.id]}
     end
+    def all_users
+        user_array = User.all
+    end
     def already_added
         user_array = self.users
     end

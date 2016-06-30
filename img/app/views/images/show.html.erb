@@ -4,9 +4,14 @@
     <%= link_to 'Back', images_path %>
 <% end %>
 <%= link_to (image_tag root_url + "images/" + @image.filename, size: "300x300"), @image %>
-<p>Image Owner: <%= current_user.email %></p>
-
-
+<p>Image Owner: 
+    <% @all_users.each do |user| %>
+        <% if user.id == @image.user_id %>
+            <%= user.name %>
+            <% @owner = user.name %>
+        <% end %>
+    <% end %>
+</p>
 <p>
   <strong>Private:</strong>
   <%= @image.private %>
@@ -21,7 +26,10 @@
       <% if !tag.new_record? %>
       <tr> 
         <td><%= tag.str %> </td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+        <% if current_user.name == @owner %>
+            <td><%= link_to 'Edit', edit_tag_url(tag) %></td>
+            <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+        <% end %>
       </tr>
       <% end %>
     <% end %>
@@ -34,10 +42,15 @@
             <%= f.submit "Add new Tag" %>
         <% end %>
     </p>
-    <p><b>Users who have access: </b>
+    <p>
+    <table><thead><th>Users who have access: </th></thead>
         <% @list_of_users.each do |user| %>
-            <%= user.name %>
+            <tr>
+                <td><%= user.name + ": (" + user.email + ")" %></td>
+               
+            </tr>
         <% end %>
+    </table>
     </p>
     <%= render 'image_users/form' %>
     <br>

@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
+  def all_users
+      user_array = User.all
+  end
 end
