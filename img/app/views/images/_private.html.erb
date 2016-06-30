@@ -1,0 +1,8 @@
+<div id="field">
+    <%= form_for([@image]) do |f| %>
+        <br>
+        <%= f.label "private: " %>
+        <%= f.check_box :private %>
+        <%= f.submit "Change" %>
+    <% end %>
+</div>

@@ -8,6 +8,9 @@ class Image < ActiveRecord::Base
         user_array = User.all - self.users - [self.user]
         user_array = user_array.map {|user| [user.name + "("+ user.email + ")", user.id]}
     end
+    def already_added
+        user_array = self.users
+    end
     def current_user_access
         if self.private == false
             return true
@@ -17,5 +20,9 @@ class Image < ActiveRecord::Base
             return true
         end
         return false
+    end
+
+    def generate_filename
+        self.filename = (0...10).map { ('a'..'z').to_a[rand(26)] }.join
     end
 end

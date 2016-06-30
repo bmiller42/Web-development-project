@@ -2,15 +2,6 @@
     <%= form_for([@image, @image_user]) do |f| %>
         <%= f.select :user_id, @eligible_users %>
         <%= f.submit "Add selected user" %>
-        <br>
-        <p>Upload new image</p>
-        <%= f.file_field :uploaded_file %>
     <% end %>
-<br>
-<% else %>
-    <%= form_for([@image, @image_user]) do |f| %> 
-        <p>Upload new image</p>
-        <%= f.file_field :uploaded_file %>
-    <% end %>   
        
 <% end %>

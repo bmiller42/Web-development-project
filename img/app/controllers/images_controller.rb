@@ -25,6 +25,7 @@ class ImagesController < ApplicationController
       @tag = @image.tags.new
       @image_user = @image.image_users.new
       @owned_by_user = (@image.user == current_user)
+      @list_of_users = @image.already_added
   end
 
   # GET /images/new
@@ -86,4 +87,6 @@ class ImagesController < ApplicationController
     def image_params
       params.require(:image).permit(:filename, :private, :user_id, :tag_id)
     end
+
+
 end

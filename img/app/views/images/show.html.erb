@@ -12,27 +12,37 @@
   <%= @image.private %>
 </p>
 
-<% if @owned_by_user %>
     <p>
-    <strong>Tags: </strong>
+    <table>
+    <thead>
+        <th>Tags</th>
+    </thead>
     <% @image.tags.each do |tag| %>
-        <p>
-            <%= tag.str %> 
-        </p>
+      <% if !tag.new_record? %>
+      <tr> 
+        <td><%= tag.str %> </td>
+        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+      </tr>
+      <% end %>
     <% end %>
+    </table>
     </p>
+<% if @owned_by_user %>
     <p><b>Create new Tag: </b>
         <%= form_for([@image, @tag]) do |f| %>
             <%= f.text_field :str %>
             <%= f.submit "Add new Tag" %>
         <% end %>
     </p>
+    <p><b>Users who have access: </b>
+        <% @list_of_users.each do |user| %>
+            <%= user.name %>
+        <% end %>
+    </p>
     <%= render 'image_users/form' %>
     <br>
     <%= link_to 'Edit', edit_image_path(@image) %>
-    <%= link_to 'Destroy', @image, method: :delete, data: { confirm: 'Are you sure?' }%>
 <% end %>
 <br>
 
-
-<%= link_to 'Back', images_path %>
+<%= link_to 'Back to home page', images_path %>

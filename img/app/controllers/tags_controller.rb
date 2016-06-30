@@ -25,7 +25,9 @@ class TagsController < ApplicationController
   # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
-    set_tag
+    @image = Image.find params[:image_id]
+    @tag.image = @image
+    
     if @tag.save
       redirect_to @image, notice: 'Tag was successfully created.'
     else 
@@ -47,10 +49,7 @@ class TagsController < ApplicationController
   # DELETE /tags/1.json
   def destroy
     @tag.destroy
-    respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @tag.image, notice: 'Tag was successfully destroyed.' 
   end
 
   private
@@ -61,6 +60,6 @@ class TagsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:str, :image_id)
+      params.require(:tag).permit(:str)
     end
 end
