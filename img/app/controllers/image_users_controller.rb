@@ -53,10 +53,8 @@ class ImageUsersController < ApplicationController
   # DELETE /image_users/1.json
   def destroy
     @image_user.destroy
-    respond_to do |format|
-      format.html { redirect_to image_users_url, notice: 'Image user was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to @image_user.image, notice: 'Image user was successfully destroyed.'
+   
   end
 
   private
