@@ -24,6 +24,7 @@ body {background-color:lightgrey;}
 <div class="page">
 <body>
 <% if @my_images %>
+    <% if !@my_images.empty? %>
     <h2>My Images</h2>
     <% @my_images.each do |image| %>
         <div class="floated_img">
@@ -31,17 +32,21 @@ body {background-color:lightgrey;}
             <p><%= image.user.name %></p>
         </div>
     <% end %>
+    <% end %>
 <% end %>
+
 </div>
 <div class="page">
 <hr>
 <% if @my_private_images %>
+    <% if !@my_private_images.empty? %>
     <h3>Private Images that I can access</h3>
     <% @my_private_images.each do |image| %>
         <div class="floated_img">
             <%= link_to (image_tag root_url + "images/" + image.filename, size: "100x100"), image %>
             <p><%= image.user.name %></p>
         </div>
+    <% end %>
     <% end %>
 <% end %>
 </div>
