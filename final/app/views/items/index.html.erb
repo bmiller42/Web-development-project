@@ -1,15 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Motherboards', motherboards_url %>
+<%= link_to 'Graphics Cards', graphics_url %>
+
 <h1>Top 3 Sellers</h1>
 
 <table>
   <thead>
-    <tr>
-      <th>Filename</th>
-      <th>Price</th>
+      <tr>
+      <td>pic</th>
       <th>Name</th>
+      <th>Item type</th>
+      <th>Owner</th>
       <th>Stock</th>
       <th>Specs</th>
+      <th>Price</th>
+      <th>Comment</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,11 +23,14 @@
   <tbody>
     <% @top.each do |item| %>
       <tr>
-        <td><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %></td>
-        <td><%= item.price %></td>
+          <td><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %> </td>
         <td><%= item.name %></td>
+        <td><%= item.item_type %></td>
+        <td><%= item.owner_id %></td>
         <td><%= item.stock %></td>
         <td><%= item.specs %></td>
+        <td><%= item.price %></td>
+        <td><%= item.comment %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

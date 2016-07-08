@@ -2,14 +2,24 @@
 
 one:
   filename: MyString
-  price: 
   name: MyString
+  item_type: MyString
+  owner_id: 1
+  on_sale: false
+  purchased: 1
   stock: 1
   specs: MyString
+  price: 1
+  comment_id: 
 
 two:
   filename: MyString
-  price: 
   name: MyString
+  item_type: MyString
+  owner_id: 1
+  on_sale: false
+  purchased: 1
   stock: 1
   specs: MyString
+  price: 1
+  comment_id: 

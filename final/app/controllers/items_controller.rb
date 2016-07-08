@@ -5,15 +5,20 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
-    @top = @items.max(3) {|item1, item2| item1.purchased <=> item2.purchased }
+    @top = @items.max(3) {|item1, item2| item1.purchased <=> item2.purchased}
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
-    @spec = @item.specs.split(',')
   end
 
+  def motherboards
+
+  end
+  def graphics
+
+  end
   # GET /items/new
   def new
     @item = Item.new
@@ -27,10 +32,15 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-    if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
-    else
-     render :new
+
+    respond_to do |format|
+      if @item.save
+        format.html { redirect_to @item, notice: 'Item was successfully created.' }
+        format.json { render :show, status: :created, location: @item }
+      else
+        format.html { render :new }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -66,6 +76,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:filename, :price, :name, :stock, :specs)
+      params.require(:item).permit(:filename, :name, :item_type, :owner_id, :on_sale, :purchased, :stock, :specs, :price, :comment_id)
     end
 end

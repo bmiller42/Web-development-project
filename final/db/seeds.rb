@@ -36,22 +36,22 @@ users = User.create(
 
 items = Item.create(
   [
-    { filename: "m1.jpg", price: 99.99, name: "ASUS 1000x", purchased: 8, stock: 10, specs: ["AM3+ socket with 970 chipset for AMD FX processors", "Dual USB 3.1 Type A ports and M.2 (PCIe 2.0 x4) for ultra-speedy data transfers" ] },
-    { filename: "m2.jpg", price: 120, name: "ASUS Saber 5.1", purchased: 10, stock: 10, specs: ["Dual Intelligent Processors 3 - New DIGI+ Power Control, with DRAM and CPU Power, and SMART DIGI+ Key" ] },
-    { filename: "m3.jpg", price: 85,  name: "ASUS Saber 6.1", purchased: 11, stock: 10, specs: ["Dual Intelligent Processors 5 with 5-Way Optimization", "USB 3.1 Boost"] },
-    { filename: "m4.jpg", price: 90, name: "ASUS saber 7.1", purchased: 10, stock: 2, specs: ["LGA1151 socket for 6th Gen Intel Core Desktop Processors", "USB 3.1 Type A/C & M.2: Ready for the next-gen devices and storage"] },
-    { filename: "m5.jpg", price: 112, name: "intel crapHeap", purchased: 2, stock: 10, specs: ["can run doom"] },
-    { filename: "m6.jpg", price: 115, name: "msi DragonRed", purchased: 5, stock: 10, specs: ["Memory: 2x DDR4-2133 MHz Slots, Dual Channel, Max Capacity of 32GB", "Slots: 1x PCI-Express 3.0 x16 Slot, 2x PCI-Express 3.0 x1 Slots, SATA: 6x SATA3 Ports"] },
-    { filename: "m7.jpg", price: 95, name: "msi Dragon 2.0", purchased: 3, stock: 10, specs: ["Socket LGA 1150, Supports DDR3-3300(OC) Memory, M.2 + USB 3.0 + SATA 6Gb/s"] },
-	{ filename: "m8.jpg", price: 100, name: "nVidia g2k", purchased: 9, stock: 10, specs: ["3 PCI-E x16 3.0 (16x single card, 8x+8x dual card or 8x+4x+4x triple card) and 4 PCI-E x1", "Supports 4th and 5th Gen Intel Core / Pentium / Celeron processors for LGA 1150 socket"] }, 
-	{ filename: "g1.jpg", price: 99.99, name: "XFX 100", purchased: 4, stock: 10, specs: ["AM3+ socket with 970 chipset for AMD FX processors", "Dual USB 3.1 Type A ports and M.2 (PCIe 2.0 x4) for ultra-speedy data transfers" ] },
-    { filename: "g2.jpg", price: 120, name: "ASUS Saber 5.1", purchased: 15, stock: 10, specs: ["Dual Intelligent Processors 3 - New DIGI+ Power Control, with DRAM and CPU Power, and SMART DIGI+ Key" ] },
-    { filename: "g3.jpg", price: 85,  name: "msi Tinytot", purchased: 3, stock: 10, specs: ["can run doom"] },
-    { filename: "g4.jpg", price: 90, name: "ASUS saber 7.1", purchased: 10, stock: 10, specs: ["LGA1151 socket for 6th Gen Intel Core Desktop Processors", "USB 3.1 Type A/C & M.2: Ready for the next-gen devices and storage"] },
-    { filename: "g5.jpg", price: 112, name: "intel crapHeap", purchased: 2, stock: 10, specs: ["can run doom"] },
-    { filename: "g6.jpg", price: 115, name: "msi DragonRed", purchased: 9, stock: 10, specs: ["Memory: 2x DDR4-2133 MHz Slots, Dual Channel, Max Capacity of 32GB", "Slots: 1x PCI-Express 3.0 x16 Slot, 2x PCI-Express 3.0 x1 Slots, SATA: 6x SATA3 Ports"] },
-    { filename: "g7.jpg", price: 95, name: "msi Dragon 2.0", purchased: 3, stock: 10, specs: ["Socket LGA 1150, Supports DDR3-3300(OC) Memory, M.2 + USB 3.0 + SATA 6Gb/s"] },
-	{ filename: "g8.jpg", price: 100, name: "nVidia g2k", purchased: 12, stock: 10, specs: ["3 PCI-E x16 3.0 (16x single card, 8x+8x dual card or 8x+4x+4x triple card) and 4 PCI-E x1", "Supports 4th and 5th Gen Intel Core / Pentium / Celeron processors for LGA 1150 socket"] }
+    { filename: "m1.jpg", price: 99.99, name: "ASUS 1000x", owner_id: 2, on_sale: false, item_type: "motherboard", purchased: 8, stock: 10, specs: "AM3+ socket with 970 chipset for AMD FX processors, Dual USB 3.1 Type A ports and M.2 (PCIe 2.0 x4) for ultra-speedy data transfers" },
+    { filename: "m2.jpg", price: 120, name: "ASUS Saber 5.1", owner_id: 3, on_sale: false, item_type: "motherboard", purchased: 10, stock: 10, specs: ["Dual Intelligent Processors 3 - New DIGI+ Power Control, with DRAM and CPU Power, and SMART DIGI+ Key" ] },
+    { filename: "m3.jpg", price: 85,  name: "ASUS Saber 6.1", owner_id: 4, on_sale: false, item_type: "motherboard", purchased: 11, stock: 10, specs: ["Dual Intelligent Processors 5 with 5-Way Optimization", "USB 3.1 Boost"] },
+    { filename: "m4.jpg", price: 90, name: "ASUS saber 7.1", owner_id: 2, on_sale: false, item_type: "motherboard", purchased: 10, stock: 2, specs: ["LGA1151 socket for 6th Gen Intel Core Desktop Processors", "USB 3.1 Type A/C & M.2: Ready for the next-gen devices and storage"] },
+    { filename: "m5.jpg", price: 112, name: "intel crapHeap", owner_id: 1, on_sale: false, item_type: "motherboard", purchased: 2, stock: 10, specs: ["can run doom"] },
+    { filename: "m6.jpg", price: 115, name: "msi DragonRed", owner_id: 3, on_sale: false, item_type: "motherboard", purchased: 5, stock: 10, specs: ["Memory: 2x DDR4-2133 MHz Slots, Dual Channel, Max Capacity of 32GB", "Slots: 1x PCI-Express 3.0 x16 Slot, 2x PCI-Express 3.0 x1 Slots, SATA: 6x SATA3 Ports"] },
+    { filename: "m7.jpg", price: 95, name: "msi Dragon 2.0", owner_id: 1, on_sale: false, item_type: "motherboard", purchased: 3, stock: 10, specs: ["Socket LGA 1150, Supports DDR3-3300(OC) Memory, M.2 + USB 3.0 + SATA 6Gb/s"] },
+	{ filename: "m8.jpg", price: 100, name: "nVidia g2k", owner_id: 3, on_sale: false, item_type: "motherboard", purchased: 9, stock: 10, specs: ["3 PCI-E x16 3.0 (16x single card, 8x+8x dual card or 8x+4x+4x triple card) and 4 PCI-E x1", "Supports 4th and 5th Gen Intel Core / Pentium / Celeron processors for LGA 1150 socket"] }, 
+	{ filename: "g1.jpg", price: 99.99, name: "XFX 100", owner_id: 1, on_sale: false, item_type: "graphics card", purchased: 4, stock: 10, specs: ["AM3+ socket with 970 chipset for AMD FX processors", "Dual USB 3.1 Type A ports and M.2 (PCIe 2.0 x4) for ultra-speedy data transfers" ] },
+    { filename: "g2.jpg", price: 120, name: "msi R7 370", owner_id: 2, on_sale: false, item_type: "graphics card", purchased: 15, stock: 10, specs: "Dual Intelligent Processors 3 - New DIGI+ Power Control, with DRAM and CPU Power, and SMART DIGI+ Key" },
+    { filename: "g3.jpg", price: 85,  name: "msi Tiny Thing", owner_id: 1, on_sale: false, item_type: "graphics card", purchased: 3, stock: 10, specs: ["can run doom"] },
+    { filename: "g4.jpg", price: 90, name: "GigaByte GTX 980ti", owner_id: 4, on_sale: false, item_type: "graphics card", purchased: 10, stock: 10, specs: ["LGA1151 socket for 6th Gen Intel Core Desktop Processors", "USB 3.1 Type A/C & M.2: Ready for the next-gen devices and storage"] },
+    { filename: "g5.jpg", price: 112, name: "ASUS amd 7850", owner_id: 1, on_sale: false, item_type: "graphics card", purchased: 2, stock: 10, specs: ["can run doom"] },
+    { filename: "g6.jpg", price: 115, name: "Amd Firepro S9100", owner_id: 12, on_sale: false, item_type: "graphics card", purchased: 9, stock: 10, specs: ["Memory: 2x DDR4-2133 MHz Slots, Dual Channel, Max Capacity of 32GB", "Slots: 1x PCI-Express 3.0 x16 Slot, 2x PCI-Express 3.0 x1 Slots, SATA: 6x SATA3 Ports"] },
+    { filename: "g7.jpg", price: 95, name: "EVGA GTX 980ti", owner_id: 4, on_sale: false, item_type: "graphics card", purchased: 3, stock: 10, specs: ["Socket LGA 1150, Supports DDR3-3300(OC) Memory, M.2 + USB 3.0 + SATA 6Gb/s"] },
+	{ filename: "g8.jpg", price: 100, name: "AMD FirePro W8100", owner_id: 2, on_sale: false, item_type: "graphics card", purchased: 12, stock: 10, specs: ["3 PCI-E x16 3.0 (16x single card, 8x+8x dual card or 8x+4x+4x triple card) and 4 PCI-E x1", "Supports 4th and 5th Gen Intel Core / Pentium / Celeron processors for LGA 1150 socket"] }
   ]
 )
 
