@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Top 3 Sellers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Filename</th>
+      <th>Price</th>
+      <th>Name</th>
+      <th>Stock</th>
+      <th>Specs</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @top.each do |item| %>
+      <tr>
+        <td><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %></td>
+        <td><%= item.price %></td>
+        <td><%= item.name %></td>
+        <td><%= item.stock %></td>
+        <td><%= item.specs %></td>
+        <td><%= link_to 'Edit', edit_item_path(item) %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item', new_item_path %>

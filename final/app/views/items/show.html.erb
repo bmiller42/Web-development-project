@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= link_to (image_tag root_url + "images/" + @item.filename, size: "500x500"), @item %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @item.price %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @item.name %>
+</p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @item.stock %>
+</p>
+
+<p>
+  <strong>Specs:</strong>
+  <% @spec.each do |s| %>
+      <%= s %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_item_path(@item) %> |
+<%= link_to 'Back', items_path %>
