@@ -1,4 +1,21 @@
+<style>
+.graphics
+{
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
+</style>
+
 <h1>Graphics Cards</h1>
 
+<% @graphics.each do |item| %>
+    <div class="graphics">
+        <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
+        <p><%= item.name %></p>
+        <p>$<%= item.price %></p>
+    </div>
+<% end %>
 
 <%= link_to 'Back to Homepage', items_path %>

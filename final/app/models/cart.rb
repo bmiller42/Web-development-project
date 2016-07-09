@@ -1,3 +1,4 @@
 class Cart < ActiveRecord::Base
-  belongs_to :item
+  has_many :items
+  belongs_to :user
 end

@@ -14,10 +14,12 @@ class ItemsController < ApplicationController
   end
 
   def motherboards
-
+    @items = Item.all
+    @motherboards = @items.select {|item| item.item_type == "motherboard"}
   end
   def graphics
-
+    @items = Item.all
+    @graphics = @items.select {|item| item.item_type == "graphics card"}
   end
   # GET /items/new
   def new
