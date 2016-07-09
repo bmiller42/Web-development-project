@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/motherboards', to: 'items#motherboards'
   get '/graphics', to: 'items#graphics'
   get '/my_account', to: 'items#my_account'
+  get '/solid_state', to: 'items#solid_state'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

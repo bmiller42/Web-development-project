@@ -5,31 +5,62 @@
     padding: 10px;
     margin: 15px;
     display: inline-block;
+    width: 150px;
+    height: 200px;
+    text-align: center;
 }
-
+.header
+{
+    font-size: 150%;
+    text-align: center;
+}
+.h1
+{
+    font-size: 200%;
+    text-align: center;
+}
 </style>
 <div class="item">
     <p>Wallet: $<%= current_user.wallet %></p>
 </div>
 
-<h1>My Account</h1>
+<h1 class="h1">My Account</h1>
 <hr><br>
 
-<h2>Items that I am selling</h2>
+<h2 class="header">Items that I am selling</h2>
 
-<% @my_cart.each do |item| %>
+<% @my_items.each do |item| %>
     <div class="items">
-        <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
+        <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
+        <p><%= item.name %></p>
+    </div>
+<% end %>
+<hr>
+<br>
+
+<h2 class="header">Items in my Cart </h2> 
+<p class="header"> Total cart cost: $<%= @cart_cost %></p>
+
+<% @my_cart.each do |item| %> 
+<div class="items">
+    <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
+    <p><%= item.name %></p>
+    <p><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Remove Item?' } %></p>
+</div>
+<% end %>
+<hr>
+<br>
+
+<h3 class="header">Items in my Wishlist</h3>
+<% if !@my_wishlist %>
+    <p>nothing in wishlist </p>
+<% end %>
+<% @my_wishlist.each do |item| %>
+    <div class="items">
+        <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
         <p><%= item.name %></p>
     </div>
 <% end %>
 
-<h2>Items in my Cart</h2>
-
-<% @my_cart.each do |item| %> 
-<div class="items">
-    <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
-    <p><%= item.name %></p>
-</div>
-<% end %>
+<%= link_to 'Back to Homepage', items_path %>
 
