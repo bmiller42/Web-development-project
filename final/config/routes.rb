@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :items
   root "items#index"
   resources :comments
@@ -7,6 +8,7 @@ Rails.application.routes.draw do
   resources :carts
   get '/motherboards', to: 'items#motherboards'
   get '/graphics', to: 'items#graphics'
+  get '/my_account', to: 'items#my_account'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

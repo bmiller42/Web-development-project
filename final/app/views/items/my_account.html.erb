@@ -1,0 +1,35 @@
+<style>
+.items
+{
+    border: 2px solid black;
+    padding: 10px;
+    margin: 15px;
+    display: inline-block;
+}
+
+</style>
+<div class="item">
+    <p>Wallet: $<%= current_user.wallet %></p>
+</div>
+
+<h1>My Account</h1>
+<hr><br>
+
+<h2>Items that I am selling</h2>
+
+<% @my_cart.each do |item| %>
+    <div class="items">
+        <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
+        <p><%= item.name %></p>
+    </div>
+<% end %>
+
+<h2>Items in my Cart</h2>
+
+<% @my_cart.each do |item| %> 
+<div class="items">
+    <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
+    <p><%= item.name %></p>
+</div>
+<% end %>
+

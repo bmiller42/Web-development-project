@@ -14,12 +14,12 @@
 ActiveRecord::Schema.define(version: 20160708203647) do
 
   create_table "carts", force: :cascade do |t|
-    t.integer  "item_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "carts", ["item_id"], name: "index_carts_on_item_id"
+  add_index "carts", ["user_id"], name: "index_carts_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.string   "str"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 20160708203647) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.text     "cart"
+    t.integer  "wallet"
     t.string   "name"
     t.integer  "cart_id"
     t.integer  "wishlist_id"

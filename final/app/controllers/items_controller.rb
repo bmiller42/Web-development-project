@@ -17,9 +17,16 @@ class ItemsController < ApplicationController
     @items = Item.all
     @motherboards = @items.select {|item| item.item_type == "motherboard"}
   end
+
   def graphics
     @items = Item.all
     @graphics = @items.select {|item| item.item_type == "graphics card"}
+  end
+    
+  def my_account
+    @items = Item.all
+    @my_cart = current_user.cart.map {|item| @items.find(item)}
+    @my_items = @items.map {|item| item.user_id == current_user_id}
   end
   # GET /items/new
   def new
