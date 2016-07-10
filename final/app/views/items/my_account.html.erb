@@ -22,7 +22,7 @@
 </style>
 <p id="notice"><%= notice %></p>
 <div class="item">
-    <p>Wallet: $<%= current_user.wallet %></p>
+    <p>Wallet: $<%= current_user.wallet %>   <%= link_to 'add $100', walletadd_item_path(1) %></p>
 </div>
 
 <h1 class="h1">My Account</h1>
@@ -58,8 +58,10 @@
     <div class="items">
         <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
         <p><%= item.name %></p>
+        <%= link_to 'Remove', removewish_item_path(item) %>
     </div>
 <% end %>
 
+<%= link_to 'New Item', new_item_path %>
 <%= link_to 'Back to Homepage', items_path %>
 

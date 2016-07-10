@@ -6,6 +6,9 @@ Rails.application.routes.draw do
         get :remove
         get :add
         get :buy
+        get :addwish
+        get :removewish
+        get :walletadd
       end
   end
   root "items#index"

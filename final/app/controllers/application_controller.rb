@@ -15,5 +15,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:account_update) << :cart
       devise_parameter_sanitizer.for(:sign_up) << :wishlist
       devise_parameter_sanitizer.for(:account_update) << :wishlist
+      devise_parameter_sanitizer.for(:sign_up) << :bought
+      devise_parameter_sanitizer.for(:account_update) << :bought
     end  
 end

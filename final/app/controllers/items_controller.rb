@@ -34,13 +34,30 @@ class ItemsController < ApplicationController
     @my_cart = current_user.cart.map {|item| @items.find(item)} 
     @cart_cost = @my_cart.inject(0) {|sum, x| sum + x.price}
     @my_wishlist = current_user.wishlist.map {|item| @items.find(item)}
+    @wish_cost
     @my_items = @items.select {|item| item.owner_id == current_user.id}
   end
   
   def add
-    current_user.cart.push(params[:id].to_i)
-    current_user.save
-    redirect_to motherboards_url, notice: 'Item was successfully added to your cart.'
+    @item = Item.find(params[:id])
+    if @item.owner_id == current_user.id
+        redirect_to my_account_url, notice: 'You cannot buy items you are selling.'
+    else
+        current_user.cart.push(params[:id].to_i)
+        current_user.save
+        redirect_to my_account_url, notice: 'Item was successfully added to your cart.'
+    end
+  end
+
+  def addwish
+    @item = Item.find(params[:id])
+    if @item.owner_id == current_user.id
+        redirect_to my_account_url, notice: 'You cannot wish for things you already own.'
+    else
+        current_user.wishlist.push(params[:id].to_i)
+        current_user.save
+        redirect_to my_account_url, notice: 'Item has been added to your wishlist'
+    end
   end
 
   def remove 
@@ -48,17 +65,50 @@ class ItemsController < ApplicationController
     current_user.save
     redirect_to my_account_url, notice: 'Item was successfully removed.'
   end 
-    
+  def removewish
+    current_user.wishlist.select! {|item| item != params[:id].to_i}
+    current_user.save
+    redirect_to my_account_url, notice: 'Item was successfully removed.'
+  end
+  
+  def walletadd
+    current_user.wallet = current_user.wallet + 100
+    current_user.save
+    redirect_to my_account_url, notice: 'You added 100$ to your wallet'
+  end  
   def buy
     @items = Item.all
+    @users = User.all
     @my_cart = current_user.cart.map {|item| @items.find(item)}
     @cart_cost = @my_cart.inject(0) {|sum, item| sum + item.price}
     @money = (current_user.wallet - @cart_cost)
+    @outofstock = false
     if @money >= 0
+        @cart_cost = 0 #reset to 0 and recalc
+        current_user.cart.each do |id|
+            @item = @items.find(id)
+            @user = @users.find(@item.owner_id)
+            if @item.stock > 0
+                @item.purchased = @item.purchased + 1
+                @item.stock = @item.stock - 1
+                @user.wallet = @user.wallet + @item.price
+                @user.save
+                current_user.bought.push(id)
+                @item.save
+                @cart_cost = @cart_cost + @item.price
+            else
+                @outofstock = true
+            end
+
+        end    
         current_user.cart.clear
-        current_user.wallet = @money
+        current_user.wallet = (current_user.wallet - @cart_cost)
         current_user.save
-        redirect_to my_account_url, notice: 'You have bought all the items in your cart!'
+        if !@outofstock
+             redirect_to my_account_url, notice: 'You have bought all the items in your cart!'  
+        else
+            redirect_to my_account_url, notice: 'Some of the items in your cart were out of stock and unable to be purchased.'
+        end
     else
         redirect_to my_account_url, notice: 'You dont have enough money to buy all the items in your cart.'
     end
@@ -77,6 +127,11 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
+    @item.owner_id = current_user.id
+    @item.purchased = 0
+    File.open(Rails.root.join('public', 'images', @item.filename), 'wb') do |file|
+        file.write(@uploaded_io.read)
+    end
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else

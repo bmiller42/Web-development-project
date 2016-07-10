@@ -9,8 +9,10 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-
+<% end %>
+    <p>Upload an Image of the new item</p>
+    <%= f.file_field :uploaded_file %>
+    <%= f.submit "Upload image" %>
   <div class="field">
     <%= f.label :filename %><br>
     <%= f.text_field :filename %>
@@ -24,16 +26,8 @@
     <%= f.text_field :item_type %>
   </div>
   <div class="field">
-    <%= f.label :owner_id %><br>
-    <%= f.number_field :owner_id %>
-  </div>
-  <div class="field">
     <%= f.label :on_sale %><br>
     <%= f.check_box :on_sale %>
-  </div>
-  <div class="field">
-    <%= f.label :purchased %><br>
-    <%= f.number_field :purchased %>
   </div>
   <div class="field">
     <%= f.label :stock %><br>
@@ -46,10 +40,6 @@
   <div class="field">
     <%= f.label :price %><br>
     <%= f.number_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :comment_id %><br>
-    <%= f.text_field :comment_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

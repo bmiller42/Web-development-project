@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :wallet, presence: true
   serialize :cart, Array
   serialize :wishlist, Array
+  serialize :bought, Array
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 end

@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160708203647) do
     t.string   "last_sign_in_ip"
     t.text     "cart"
     t.text     "wishlist"
+    t.text     "bought"
     t.integer  "wallet"
     t.string   "name"
     t.integer  "cart_id"

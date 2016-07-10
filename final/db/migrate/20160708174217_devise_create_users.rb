@@ -31,6 +31,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
       t.text :cart
       t.text :wishlist
+      t.text :bought
       t.integer :wallet
       t.string :name
       t.references :cart

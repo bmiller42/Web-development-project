@@ -14,8 +14,14 @@ h1
 {
     text-align: center;
 }
+.back
+{
+    text-align: right;
+}
 </style>
 
+<p id="notice"><%= notice %></p>
+<p class="back"><%= link_to 'Back to Homepage', items_path %></p>
 <h1>Solid State Drives</h1>
 <hr>
 <br>
@@ -25,10 +31,12 @@ h1
     <p class="item"><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %></p>
     <p class="item"><%= item.name %></p>
     <p class="item">$<%= item.price %></p>
-    <p class="item"><%= link_to 'Add to cart', add_item_path(item) %> </p>
+    <% if item.stock > 0 %>
+        <p class="item"><%= link_to 'Add to cart', add_item_path(item) %></p>
+        <p class="item"><%= link_to 'Add to wishlist', addwish_item_path(item) %></p>
+    <% else %>
+        <p class="item">Out of Stock</p>
+    <% end %>
     </div>
 <% end %>
 
-
-
-<%= link_to 'Back to Homepage', items_path %>
