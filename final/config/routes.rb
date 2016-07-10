@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-  resources :items
+  resources :items do
+      resources :comments, :shallow=>true
+      member do
+        get :remove
+        get :add
+        get :buy
+      end
+  end
   root "items#index"
   resources :comments
   devise_for :users
@@ -10,6 +17,7 @@ Rails.application.routes.draw do
   get '/graphics', to: 'items#graphics'
   get '/my_account', to: 'items#my_account'
   get '/solid_state', to: 'items#solid_state'
+  #patch '/item/:id', to: 'items#remove'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

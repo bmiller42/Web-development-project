@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+      @comment = @item.comments.new
   end
 
   def motherboards
@@ -36,6 +37,32 @@ class ItemsController < ApplicationController
     @my_items = @items.select {|item| item.owner_id == current_user.id}
   end
   
+  def add
+    current_user.cart.push(params[:id].to_i)
+    current_user.save
+    redirect_to motherboards_url, notice: 'Item was successfully added to your cart.'
+  end
+
+  def remove 
+    current_user.cart.select! {|item| item != params[:id].to_i}
+    current_user.save
+    redirect_to my_account_url, notice: 'Item was successfully removed.'
+  end 
+    
+  def buy
+    @items = Item.all
+    @my_cart = current_user.cart.map {|item| @items.find(item)}
+    @cart_cost = @my_cart.inject(0) {|sum, item| sum + item.price}
+    @money = (current_user.wallet - @cart_cost)
+    if @money >= 0
+        current_user.cart.clear
+        current_user.wallet = @money
+        current_user.save
+        redirect_to my_account_url, notice: 'You have bought all the items in your cart!'
+    else
+        redirect_to my_account_url, notice: 'You dont have enough money to buy all the items in your cart.'
+    end
+  end
   # GET /items/new
   def new
     @item = Item.new
@@ -43,6 +70,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+
   end
 
   # POST /items
@@ -70,9 +98,10 @@ class ItemsController < ApplicationController
   # DELETE /items/1.json
   def destroy
     #@item.destroy
-
+    #current_user.cart.select! {|item| item != params[:id].to_i}
+    #current_user.save
+   
     redirect_to my_account_url, notice: 'Item was successfully destroyed.'
-    
   end
 
   private

@@ -43,8 +43,23 @@
 
 <p>
   <strong>Comments:</strong>
-  <%= @item.comment %>
+
 </p>
 
+<% @item.comments.each do |comment| %>
+    <% if !comment.new_record? %>
+        <%= comment.str %>
+        <%= link_to 'Edit', edit_comment_url(comment) %>
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }%>
+    <% end %>
+<% end %>
+<br>
+<p>Create new comment</p>
+<%= form_for([@item, @comment]) do |f| %>
+    <%= f.text_field :str %>
+    <%= f.submit "Add comment" %>
+<% end %>
+
+
 <%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<%= link_to 'Back to Homepage', items_path %>

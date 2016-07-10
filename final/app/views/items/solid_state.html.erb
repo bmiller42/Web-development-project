@@ -6,6 +6,14 @@
     margin: 10px;
     display: inline-block;
 }
+.item
+{
+    text-align: center;
+}
+h1
+{
+    text-align: center;
+}
 </style>
 
 <h1>Solid State Drives</h1>
@@ -14,9 +22,10 @@
 
 <% @solid_state.each do |item| %>
     <div class="solid_state">
-    <%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %>
-    <p><%= item.name %></p>
-    <p>$<%= item.price %></p>
+    <p class="item"><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %></p>
+    <p class="item"><%= item.name %></p>
+    <p class="item">$<%= item.price %></p>
+    <p class="item"><%= link_to 'Add to cart', add_item_path(item) %> </p>
     </div>
 <% end %>
 
