@@ -1,0 +1,1 @@
+Simple amazon/craigslist/ebay type sites where users can buy and sell items to eachother. Items consist of computer hardware. basic inventory implemented with inventory stock for each item and number sold. Each user has a cart and a wish list to which they can add items that other users are selling.
