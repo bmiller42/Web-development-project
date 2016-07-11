@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @item = Item.find params[:item_id]
     @comment.item = @item
-    @comment.user_id = current_user
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to @item, notice: 'Comment was successfully created.'
     else
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1.json
   def update
       if @comment.update(comment_params)
-        redirect_to @comment, notice: 'Comment was successfully updated.'
+        redirect_to @item, notice: 'Comment was successfully updated.'
       else
         render :edit 
       end

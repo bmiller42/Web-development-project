@@ -14,6 +14,15 @@ h1
 {
     text-align: center;
 }
+.table
+{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    padding: 5px;
+    border: 1px;
+}
+
 </style>
 
 <body style="background-color:#D5D5D5;">
@@ -56,13 +65,20 @@ h1
 
 </p>
 
+<table class="table">
 <% @item.comments.each do |comment| %>
+	<tr>
+	<% @user = @users.select {|user| user.id == comment.user_id} %>
     <% if !comment.new_record? %>
-        <%= comment.str %>
-        <%= link_to 'Edit', edit_comment_url(comment) %>
-        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }%>
+        <td><%= comment.str %></td>
+		<% if comment.user_id == current_user.id %>
+        	<td><%= link_to 'Edit', edit_comment_url(comment) %></td>
+        	<td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }%></td>
+		<% end %>
     <% end %>
+	</tr>
 <% end %>
+</table>
 <br>
 <p>Create new comment</p>
 <%= form_for([@item, @comment]) do |f| %>
@@ -70,11 +86,15 @@ h1
     <%= f.submit "Add comment" %>
 <% end %>
 <br>
+<hr>
+<br>
 <% if @item.owner_id == current_user.id %>
+	
     <p>You own this Item</p>
     <p>You have sold <%= @item.purchased %> of this item</p>
     <p>You can edit this item: <%= link_to 'Edit', edit_item_path(@item) %> </p>
     <p>You can delete this item: <%= link_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	<p class="sale">Change sale status: <%= link_to 'Sale', on_sale_item_path(@item) %> </p>
 <% else %>
     <p><%=link_to 'Add to cart', add_item_path(@item)%></p>
 <% end %>

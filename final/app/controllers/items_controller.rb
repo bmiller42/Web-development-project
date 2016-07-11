@@ -14,7 +14,9 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+	  @users = User.all
       @comment = @item.comments.new
+	  @comments = Comment.all
   end
 
   def motherboards
@@ -34,6 +36,12 @@ class ItemsController < ApplicationController
     @items = @items.select {|item| item.owner_id != current_user.id}
     @solid_state = @items.select {|item| item.item_type == "solid_state_drive"}
   end  
+  
+  def cpu
+    @items = Item.all
+    @items = @items.select {|item| item.owner_id != current_user.id}
+    @cpus = @items.select {|item| item.item_type == "cpu"}
+  end
 
   def my_account
     @items = Item.all
@@ -89,6 +97,21 @@ class ItemsController < ApplicationController
     redirect_to my_account_url, notice: 'Item was successfully removed.'
   end
   
+  def on_sale
+	@item = Item.find(params[:id])
+	if @item.on_sale
+		@item.on_sale = false 
+    	@item.price  = @item.price * 2
+		@item.save 
+		redirect_to @item, notice: 'You have put this item on sale.'
+	elsif !@item.on_sale
+		@item.price = @item.price / 2
+		@item.on_sale = true
+		@item.save
+		redirect_to @item, notice: 'You have restored this item to full price'
+	end
+  end
+ 
   def walletadd
     current_user.wallet = current_user.wallet + 100
     current_user.save

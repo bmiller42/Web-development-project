@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get :removewish
         get :walletadd
         get :wishtocart
+		get :on_sale
       end
   end
   root "items#index"
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
   get '/graphics', to: 'items#graphics'
   get '/my_account', to: 'items#my_account'
   get '/solid_state', to: 'items#solid_state'
+  get '/cpu', to: 'items#cpu'
   #patch '/item/:id', to: 'items#remove'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
