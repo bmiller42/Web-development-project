@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         get :addwish
         get :removewish
         get :walletadd
+        get :wishtocart
       end
   end
   root "items#index"

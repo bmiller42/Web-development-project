@@ -1,34 +1,44 @@
+<style>
+.item
+{
+    text-align: right;
+}    
+.image
+{
+    box-shadow: 5px 5px 10px #8A8484;
+    text-align: center;
+    width: 300px;
+    margin: auto;
+}
+h1
+{
+    text-align: center;
+}
+</style>
+
+<body style="background-color:#D5D5D5;">
 <p id="notice"><%= notice %></p>
 
-<%= link_to (image_tag root_url + "images/" + @item.filename, size: "300x300"), @item %>
+<p><%= link_to 'My_account', my_account_url %></p>
+<p class="item"><%= link_to 'Back to Homepage', items_path %></p>
+
+<div class="image"><%= link_to (image_tag root_url + "images/" + @item.filename, size: "300x300"), @item %></div>
+
+<h1><%= @item.name %></h1>
+<hr>
+<br>
 <p>
-  <strong>Name:</strong>
-  <%= @item.name %>
+    <% if @item.on_sale %>
+        <strong>This item is on sale</strong>
+    <% else %>
+        <strong>This item is not on sale</strong>
+    <% end %>
 </p>
 
 <p>
-  <strong>Item type:</strong>
-  <%= @item.item_type %>
-</p>
 
 <p>
-  <strong>Owner:</strong>
-  <%= @item.owner_id %>
-</p>
-
-<p>
-  <strong>On sale:</strong>
-  <%= @item.on_sale %>
-</p>
-
-<p>
-  <strong>Purchased:</strong>
-  <%= @item.purchased %>
-</p>
-
-<p>
-  <strong>Items left in Stock:</strong>
-  <%= @item.stock %>
+<strong><%= @item.stock %> left in Stock</strong>
 </p>
 
 <p>
@@ -59,7 +69,14 @@
     <%= f.text_field :str %>
     <%= f.submit "Add comment" %>
 <% end %>
+<br>
+<% if @item.owner_id == current_user.id %>
+    <p>You own this Item</p>
+    <p>You have sold <%= @item.purchased %> of this item</p>
+    <p>You can edit this item: <%= link_to 'Edit', edit_item_path(@item) %> </p>
+    <p>You can delete this item: <%= link_to 'Destroy', @item, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+<% else %>
+    <p><%=link_to 'Add to cart', add_item_path(@item)%></p>
+<% end %>
 
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back to Homepage', items_path %>
+</body>

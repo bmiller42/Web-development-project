@@ -5,7 +5,10 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
+    @items = @items.select {|item| item.owner_id != current_user.id}
     @top = @items.max(3) {|item1, item2| item1.purchased <=> item2.purchased}
+    @sale = @items.select {|item| item.on_sale }
+
   end
 
   # GET /items/1
@@ -16,16 +19,19 @@ class ItemsController < ApplicationController
 
   def motherboards
     @items = Item.all
+    @items = @items.select {|item| item.owner_id != current_user.id}
     @motherboards = @items.select {|item| item.item_type == "motherboard"}
   end
 
   def graphics
     @items = Item.all
+    @items = @items.select {|item| item.owner_id != current_user.id}
     @graphics = @items.select {|item| item.item_type == "graphics card"}
   end
   
   def solid_state
     @items = Item.all
+    @items = @items.select {|item| item.owner_id != current_user.id}
     @solid_state = @items.select {|item| item.item_type == "solid_state_drive"}
   end  
 
@@ -34,8 +40,9 @@ class ItemsController < ApplicationController
     @my_cart = current_user.cart.map {|item| @items.find(item)} 
     @cart_cost = @my_cart.inject(0) {|sum, x| sum + x.price}
     @my_wishlist = current_user.wishlist.map {|item| @items.find(item)}
-    @wish_cost
+    @wish_cost = @my_wishlist.inject(0) {|sum, item| sum + item.price}
     @my_items = @items.select {|item| item.owner_id == current_user.id}
+    @bought = current_user.bought.map {|item| @items.find(item)}
   end
   
   def add
@@ -59,7 +66,18 @@ class ItemsController < ApplicationController
         redirect_to my_account_url, notice: 'Item has been added to your wishlist'
     end
   end
-
+  
+  def wishtocart
+    @item = Item.find(params[:id])
+        if @item.owner_id == current_user.id
+            redirect_to my_account_url, notice: 'You cannot buy items you are selling.'
+        else
+            current_user.wishlist.delete(params[:id].to_i)
+            current_user.cart.push(params[:id].to_i)
+            current_user.save
+            redirect_to my_account_url, notice: 'Item was successfully added to your cart.'
+        end
+  end
   def remove 
     current_user.cart.select! {|item| item != params[:id].to_i}
     current_user.save
@@ -129,6 +147,7 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.owner_id = current_user.id
     @item.purchased = 0
+    @uploaded_io = params[:item][:uploaded_file]
     File.open(Rails.root.join('public', 'images', @item.filename), 'wb') do |file|
         file.write(@uploaded_io.read)
     end
@@ -152,10 +171,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    #@item.destroy
-    #current_user.cart.select! {|item| item != params[:id].to_i}
-    #current_user.save
-   
+    @item.destroy
     redirect_to my_account_url, notice: 'Item was successfully destroyed.'
   end
 

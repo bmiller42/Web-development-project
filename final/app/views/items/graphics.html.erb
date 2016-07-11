@@ -1,24 +1,47 @@
 <style>
 .graphics
 {
-    border: 2px solid black;
+    background-color: #9099A2;
+    border: 2px #96858F;
     padding: 10px;
     margin: 10px;
     display: inline-block;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #8A8484;
 }
 .item
 {
+    font-size: 120%;
+    font-weight: bold;
+    color: #062F4F;
     text-align: center;
 }
 h1
 {
+    color: #062F4F;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     text-align: center;
+    font-family: "Gotham";
+    font-size: 300%;
 }
 .back
 {
     text-align: right;
 }
+.button
+{
+    border: 1px #96858F;
+    text-align: center;
+    border-radius: 10px;
+}
+.image
+{
+    text-align: center;
+    border-radius: 10px;
+}
 </style>
+
+<body style="background-color:#D5D5D5;">
 
 <p id="notice"><%= notice %></p>
 <p class="back"><%= link_to 'Back to Homepage', items_path %></p>
@@ -28,15 +51,15 @@ h1
 
 <% @graphics.each do |item| %>
     <div class="graphics">
-        <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
+        <p class="image"<%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %><p>
         <p class="item"><%= item.name %></p>
         <p class="item">$<%= item.price %></p>
         <% if item.stock > 0 %>
-            <p class="item"><%= link_to 'Add to cart', add_item_path(item) %></p>
-            <p class="item"><%= link_to 'Add to wishlist', addwish_item_path(item) %></p>
+            <p class="button"><%= link_to 'Add to cart', add_item_path(item) %></p>
+            <p class="button"><%= link_to 'Add to wishlist', addwish_item_path(item) %></p>
         <% else %>
             <p class="item">Out of Stock</p>
         <% end %>
     </div>
 <% end %>
-
+</body>

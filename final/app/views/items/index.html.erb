@@ -1,43 +1,97 @@
+<style>
+.sellers
+{
+    background-color: #9099A2;
+    border: 2px #96858F;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block; 
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #8A8484;
+    width: 300px;
+}
+.item
+{
+    font-size: 120%;
+    font-weight: bold;
+    color: #062F4F;
+    text-align: center;
+
+}
+.header
+{
+    color: #062F4F;
+    
+    text-align: center;
+    font-size: 300%;
+    font-family: "Times New Roman";
+}
+.button
+{
+    border: 1px #96858F;
+    text-align: center;
+    border-radius: 10px;
+
+}
+.image
+{
+    text-align: center;
+}
+.top
+{
+    background-color: #062F4F;
+    color: #B82601;
+    font-size: 125%;
+    text-align: center;
+}
+.links
+{
+    color: #B82601;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+</style>
+
+<body style="background-color:#D5D5D5;">
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Motherboards', motherboards_url %>
-<%= link_to 'Graphics Cards', graphics_url %>
-<%= link_to 'Solid State Drives', solid_state_url %>
-<%= link_to 'My_account', my_account_url %>
+<div class="top">
+    <div class="links"><%= link_to 'Motherboards', motherboards_url %></div>
+    <div class="links"><%= link_to 'Graphics Cards', graphics_url %></div>
+    <div class="links"><%= link_to 'Solid State Drives', solid_state_url %></div>
+    <div class="links"><%= link_to 'My_account', my_account_url %></div>
+</div>
+<hr>
 <br>
 
-<h1>Top 3 Sellers</h1>
-
-<table>
-  <thead>
-      <tr>
-      <td>pic</th>
-      <th>Name</th>
-      <th>Item type</th>
-      <th>Owner</th>
-      <th>Stock</th>
-      <th>Specs</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @top.each do |item| %>
-      <tr>
-          <td><%= link_to (image_tag root_url + "images/" + item.filename, size: "100x100"), item %> </td>
-        <td><%= item.name %></td>
-        <td><%= item.item_type %></td>
-        <td><%= item.owner_id %></td>
-        <td><%= item.stock %></td>
-        <td><%= item.specs %></td>
-        <td><%= item.price %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h1 class="header">Top 3 Sellers</h1>
+    
+<% @top.each do |item| %>
+    <div class="sellers">
+        <p class="image"><%= link_to (image_tag root_url + "images/" + item.filename, size: "175x175"), item %> </p>
+        <p class="item"><%= item.name %></p>
+        <p class="item">$<%= item.price %></p>
+        <p class="item"><%= item.stock %> left in stock</p>
+        <p class="button"><%=link_to 'Add to cart', add_item_path(item)%></p>
+        <p class="button"><%= link_to 'Add to wishlist', addwish_item_path(item) %></p>
+    </div>
+<% end %>
+<hr>
 <br>
 
+<h2 class="header">On sale %50 off</h2>
+
+<% @sale.each do |item| %>
+    <div class="sellers">
+        <p class="image"><%= link_to (image_tag root_url + "images/" + item.filename, size: "175x175"), item %> </p>
+        <p class="item"><%= item.name %></p>
+        <p class="item">$<%= item.price %></p>
+        <p class="item"><%= item.stock %> left in stock</p>
+        <p class="button"><%=link_to 'Add to cart', add_item_path(item)%></p>
+        <p class="button"><%= link_to 'Add to wishlist', addwish_item_path(item) %></p>
+    </div>
+<% end %>
+
+<br>
+</body>

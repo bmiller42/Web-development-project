@@ -5,8 +5,7 @@
     padding: 10px;
     margin: 15px;
     display: inline-block;
-    width: 150px;
-    
+    box-shadow: 5px 5px 10px #8A8484; 
     text-align: center;
 }
 .header
@@ -19,12 +18,30 @@
     font-size: 200%;
     text-align: center;
 }
+.table
+{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    padding: 5px;
+    margin: auto;
+}
+td, th
+{
+    border: 2px solid #dddddd;
+    text-align: left;
+    padding: 8px; 
+}
+tr:nth-child(even) 
+{
+    background-color: #dddddd;
+}
 </style>
 <p id="notice"><%= notice %></p>
-<div class="item">
+<div>
     <p>Wallet: $<%= current_user.wallet %>   <%= link_to 'add $100', walletadd_item_path(1) %></p>
 </div>
-
+<p style="text-align: right;"><%= link_to 'Continue Shopping', items_path %></p>
 <h1 class="h1">My Account</h1>
 <hr><br>
 
@@ -34,8 +51,11 @@
     <div class="items">
         <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
         <p><%= item.name %></p>
+        <p><%= item.stock %> left in stock</p>
     </div>
 <% end %>
+<p class="header"><%= link_to 'Create a new item to sell', new_item_path %></p>
+        
 <hr>
 <br>
 
@@ -46,6 +66,7 @@
 <div class="items">
     <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
     <p><%= item.name %></p>
+    <p>$<%= item.price %></p>
     <%= link_to 'Remove', remove_item_path(item) %>
 </div>
 <% end %>
@@ -53,15 +74,37 @@
 <br>
 
 <h3 class="header">Items in my Wishlist</h3>
-
+<p class="header"> Total wishlist cost: $<%= @wish_cost %></p>
 <% @my_wishlist.each do |item| %>
     <div class="items">
         <%= link_to (image_tag root_url + "images/" + item.filename, size: "150x150"), item %>
         <p><%= item.name %></p>
+        <p>$<%= item.price %></p>
+        <%= link_to 'Add to cart', wishtocart_item_path(item) %>
         <%= link_to 'Remove', removewish_item_path(item) %>
     </div>
 <% end %>
+<hr>
+<br>
 
-<%= link_to 'New Item', new_item_path %>
-<%= link_to 'Back to Homepage', items_path %>
+<h4 class="header">Items I have purchased</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @bought.each do |item| %>
+            <tr>
+                <td><%= item.name %></td>
+                <td>$<%= item.price %></td>
+            </tr>
+        <% end %>
+    </tbody>
+
+</table>
+
+<p class="header"><%= link_to 'Create a new item to sell', new_item_path %></p>
 

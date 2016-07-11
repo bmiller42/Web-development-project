@@ -1,21 +1,3 @@
-<style>
-.field
-{
-    font-family: arial, sans-serif;
-    background-color: #9099A2;
-    border: 2px #96858F;
-    padding: 10px;
-    margin: 10px;
-    width: 400px;    
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px #8A8484;
-}
-.submit
-{
-    text-align: center;
-}
-</style>
-
 <%= form_for(@item) do |f| %>
   <% if @item.errors.any? %>
     <div id="error_explanation">
@@ -28,13 +10,6 @@
       </ul>
     </div>
 <% end %>
-<div>
-  <div class="field">
-    <p>Upload an Image of the new item</p>
-    <%= f.file_field :uploaded_file %>
-    <%= f.submit "Upload image" %>
-  </div>
-    <br>
   <div class="field">
     <%= f.label :filename %><br>
     <%= f.text_field :filename %>
@@ -44,8 +19,8 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :item_type %><br>
-    <%= f.select :item_type, [['motherboard'], ['graphics card'], ['solid_state_drive'], ['cpu']] %><br>
+      <%= f.label :item_type %><br>
+      <%= f.select :item_type, [['motherboard'], ['graphics card'], ['solid_state_drive'], ['cpu']] %><br>
   </div>
   <div class="field">
     <%= f.label :on_sale %><br>
@@ -63,9 +38,7 @@
     <%= f.label :price %><br>
     <%= f.number_field :price %>
   </div>
-  <div>
+  <div class="actions">
     <%= f.submit %>
   </div>
-</div>
-
 <% end %>
